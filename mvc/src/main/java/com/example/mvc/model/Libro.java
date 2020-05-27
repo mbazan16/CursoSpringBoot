@@ -14,7 +14,7 @@ public class Libro {
 	private int id;
 	
 	@ManyToOne
-	//@JoinColumn(name = "id")
+	//@JoinColumn(name = "idEditorial")
 	private Editorial editorial;
 	
 	

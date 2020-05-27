@@ -1,12 +1,9 @@
 package com.example.mvc.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Editorial {
@@ -19,8 +16,9 @@ public class Editorial {
 	private String telefono;
 	private String email;
 	
-	@OneToMany(mappedBy = "editorial")
-	private List<Libro> libros;
+	
+	
+	
 	
 	public Editorial()
 	{
@@ -34,13 +32,7 @@ public class Editorial {
 		this.email = correo;
 	}
 	
-	public List<Libro> getLibros() {
-		return libros;
-	}
-
-	public void setLibros(List<Libro> libros) {
-		this.libros = libros;
-	}
+	
 	
 	public String getNombre() {
 		return nombre;
@@ -70,6 +62,8 @@ public class Editorial {
 	{
 		this.id = id;
 	}
+
+	
 	
 	
 }
