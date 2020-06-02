@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -26,9 +27,7 @@ import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.domain.DataIn;
 import com.example.domain.DataOut;
@@ -56,19 +55,18 @@ public class JobBatchConfiguration {
     @Bean
     public ItemProcessor<DataIn, DataOut> processor() {
     	log.info("[processor]"); 
-        return new ItemProcessor<DataIn, DataOut>() {
-            @Override
-            public DataOut process(DataIn dataIn) throws Exception {
-            	log.info("[process]");
-            	log.info("[process]dataIn:"+dataIn);
-                DataOut dataOut = new DataOut();
-                dataOut.setText1(dataIn.getText1().toUpperCase());
-                dataOut.setText2(dataIn.getText2());
-
-            	log.info("[process]dataOut:"+dataOut);
-                return dataOut;
-            }
-        };
+    	
+    	return new MyProcessor();
+		/*
+		 * return new ItemProcessor<DataIn, DataOut>() {
+		 * 
+		 * @Override public DataOut process(DataIn dataIn) throws Exception {
+		 * log.info("[process]"); log.info("[process]dataIn:"+dataIn); DataOut dataOut =
+		 * new DataOut(); dataOut.setText1(dataIn.getText1().toUpperCase());
+		 * dataOut.setText2(dataIn.getText2());
+		 * 
+		 * log.info("[process]dataOut:"+dataOut); return dataOut; } };
+		 */
     }
 
     @Bean
@@ -126,21 +124,22 @@ public class JobBatchConfiguration {
 
     @Bean
     public Step step1(StepBuilderFactory stepBuilderFactory, ItemReader<DataIn> reader,
-                      ItemWriter<DataOut> writer, ItemProcessor<DataIn, DataOut> processor) {
+                      ItemWriter<DataOut> writer, ItemProcessor<DataIn, DataOut> processor, StepNotificationListener listener, StepNotificationListenerBD listenerBD) {
 
         return stepBuilderFactory.get("step1")
                 .<DataIn, DataOut> chunk(100)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .listener(listener)
+                .listener(listenerBD)
                 .build();
     }
 
 
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-
+	/*
+	 * @Bean public JdbcTemplate jdbcTemplate(DataSource dataSource) { return new
+	 * JdbcTemplate(dataSource); }
+	 */
 
 }
