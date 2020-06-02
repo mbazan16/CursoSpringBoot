@@ -1,0 +1,4 @@
+HEADER
+TEXT1,Buenos dias
+TEXT2,Buenas noches
+FOOTER
