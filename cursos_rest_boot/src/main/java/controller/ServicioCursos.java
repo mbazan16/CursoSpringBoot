@@ -20,31 +20,25 @@ public class ServicioCursos {
 	@Autowired
 	DaoCursos daoCursos;
 	
-	@GetMapping(value="cursos",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Curso> getCursos(){
 		return daoCursos.recuperarTodosCursos();
 	}
-	@GetMapping(value="cursos/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public Curso buscarCurso(@PathVariable("id") int idCurso) {
 		return daoCursos.buscarCurso(idCurso);
 	}
-	/*
-	@GetMapping(value="cursos/{duracion}/{nombre}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public Curso buscarCursoPorDuracionNombre(@PathVariable("duracion") int duracion, 
-										@PathVariable("nombre")	String nombre) {
-		return null;
-	}
-	*/
-	@DeleteMapping(value="cursos/{id}")
+	
+	@DeleteMapping(value="{id}")
 	public void eliminarCurso(@PathVariable("id") int idCurso) {
 		daoCursos.eliminarCurso(idCurso);
 	}
-	@PostMapping(value="cursos",consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void nuevoCurso(@RequestBody Curso curso) {
 		daoCursos.altaCurso(curso);
 	}
 	
-	@PutMapping(value="cursos/{id}/{nuevoNombre}")
+	@PutMapping(value="{id}/{nuevoNombre}")
 	public void actualizarCurso(@PathVariable("id") int idCurso,
 			@PathVariable("nuevoNombre") String nombre) {
 		Curso curso=daoCursos.buscarCurso(idCurso);
