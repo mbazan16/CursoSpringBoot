@@ -1,5 +1,9 @@
 package com.example.sectoken.model;
 
+import javax.annotation.security.RolesAllowed;
+
+import org.springframework.security.access.annotation.Secured;
+
 public class Usuario {
     private int id;
     private String name;
@@ -17,10 +21,12 @@ public class Usuario {
         this.id = id;
     }
 
+    
     public String getName() {
         return name;
     }
 
+   
     public void setName(String name) {
         this.name = name;
     }

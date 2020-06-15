@@ -34,7 +34,8 @@ public class HuertoController {
 
 		return "index";
 	}
-
+	
+	 
 	
 	
 	@RequestMapping("/ver")

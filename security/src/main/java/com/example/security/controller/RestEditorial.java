@@ -34,6 +34,7 @@ public class RestEditorial {
 	public List<Editorial> findAll(){
 	      logger.info("RestEditorial[findAll]");
 	      logger.warn("this is a WARN message");
+	      logger.debug("this is a DEBUG message");
 		return servicio.getElements();
 	}
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

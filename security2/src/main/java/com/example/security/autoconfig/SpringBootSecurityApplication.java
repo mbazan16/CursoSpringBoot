@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication(exclude = {
   SecurityAutoConfiguration.class
   //    ,ManagementWebSecurityAutoConfiguration.class
-}, scanBasePackages = "com.example.security.autoconfig")
+}, scanBasePackages = "com.example.security.autoconfig.config")
 public class SpringBootSecurityApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootSecurityApplication.class, args);

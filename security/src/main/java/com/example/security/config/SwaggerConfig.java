@@ -15,17 +15,21 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket api() {
-		/*
-		 * Nos da informacion de todos los controladores del paquete
-		 * com.example.security.controller return new
-		 * Docket(DocumentationType.SWAGGER_2) .select() .apis(RequestHandlerSelectors
-		 * .basePackage("com.example.security.controller")) .paths(PathSelectors.any())
-		 * .build();
-		 */
-
 		
+		 
+		  
+		  return new   Docket(DocumentationType.SWAGGER_2)
+				  .select()
+				  .apis(RequestHandlerSelectors.basePackage("com.example.security.controller"))
+				  .paths(PathSelectors.any())
+				  .build();
+		 		
 
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.ant("/editorial/**")).build();
+		/* return new Docket(DocumentationType.SWAGGER_2)
+				.select()
+				.apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.ant("/editorial/**"))
+				.build();
+				*/
 	}
 }

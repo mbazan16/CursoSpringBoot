@@ -8,13 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 
 public class BasicConfiguration extends WebSecurityConfigurerAdapter {
- 
-	  
+
 	/*
 	 * Configuracción Base
 	 * 
@@ -29,59 +29,59 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
 	 * @Override protected void configure(HttpSecurity http) throws Exception { http
 	 * .authorizeRequests() .anyRequest() .authenticated() .and() .httpBasic(); }
 	 */
-    
-    @Bean
+
+	@Bean
 	public AuthenticationManager authMg() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	//definición roles y usuarios
+
+	// definición roles y usuarios
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-        .inMemoryAuthentication()
-        .withUser("user1")
-          .password("{noop}user1") //lo de {noop} se pone para no obligar a usar mecanismo de encriptación
-          .roles("COMUN")
-          .and()
-        .withUser("admin")
-          .password("{noop}admin")
-          .roles("COMUN", "PROF");
-		
-		/*lo siguiente sería para el caso de que
-		 * quisiéramos encriptar la password:
-		 * auth
-	        .inMemoryAuthentication()
-	        .withUser("user1")
-	          .password(new BCryptPasswordEncoder().encode("user1"))
-	          .roles("USER")
-	          .and()
-	        .withUser("admin")
-	          .password(new BCryptPasswordEncoder().encode("admin"))
-	          .roles("USER", "ADMIN");
+
+		auth.inMemoryAuthentication()
+		.withUser("user1")
+		.password("{noop}user1")// lo de {noop} se pone para no obligar a usar mecanismo de encriptación
+		.roles("COMUN")
+		.and()
+		.withUser("admin")
+		.password("{noop}admin")
+		.roles("COMUN", "PROF");
+
+		/*
+		 * auth .inMemoryAuthentication() .withUser("user1") .password(new
+		 * BCryptPasswordEncoder().encode("user1")) .roles("USER") .and()
+		 * .withUser("admin") .password(new BCryptPasswordEncoder().encode("admin"))
+		 * .roles("USER", "ADMIN");
 		 */
-		
-		/*la siguiente configuración sería para el caso de 
-		 * usuarios en una base de datos
-		 * auth.jdbcAuthentication().dataSource(dataSource)
-        	.usersByUsernameQuery("select username, password, enabled"
-            	+ " from users where username=?")
-        	.authoritiesByUsernameQuery("select username, authority "
-            	+ "from authorities where username=?");
+
+		/*
+		 * la siguiente configuración sería para el caso de usuarios en una base de
+		 * datos auth.jdbcAuthentication().dataSource(dataSource)
+		 * .usersByUsernameQuery("select username, password, enabled" +
+		 * " from users where username=?")
+		 * .authoritiesByUsernameQuery("select username, authority " +
+		 * "from authorities where username=?");
 		 */
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		http
+		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/editorial/**").hasRole("PROF")	
-		.antMatchers(HttpMethod.DELETE,"/libro/**").hasRole("PROF")	
-		.antMatchers(HttpMethod.PUT,"/libro/**").hasRole("PROF")
-		.antMatchers(HttpMethod.POST,"/libro/**").hasRole("PROF")
-		.antMatchers("/libro/**").hasRole("COMUN")	
+		.antMatchers("/actuator/**").hasRole("PROF")
+		.antMatchers("/editorial/**").hasRole("PROF")
+		.antMatchers(HttpMethod.DELETE, "/libro/**").hasRole("PROF")
+		.antMatchers(HttpMethod.PUT, "/libro/**").hasRole("PROF")
+		.antMatchers(HttpMethod.POST, "/libro/**").hasRole("PROF")
+		.antMatchers("/libro/**").hasRole("COMUN")
+		.antMatchers("/h2-console/**").permitAll()
 		.and()
-		.httpBasic();
-	
+		.headers().frameOptions().disable()
+		.and()
+		.csrf().ignoringAntMatchers("/h2-console/**")
+		.and().httpBasic();
+
 	}
 }
-

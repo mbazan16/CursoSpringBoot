@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SecurityApplication {
 	final static Logger logger = LoggerFactory.getLogger(SecurityApplication.class);
+	
 	public static void main(String[] args) {
 	      logger.info("this is a info message");
 	      logger.warn("this is a warn message");

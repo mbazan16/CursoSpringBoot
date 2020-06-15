@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.baeldung.springbootsecurity.basic_auth.SpringBootSecurityApplication</start-class>
+		<!-- start-class>com.example.security.autoconfig.SpringBootSecurityApplication</start-class -->
 	</properties>
 
 	<dependencies>		

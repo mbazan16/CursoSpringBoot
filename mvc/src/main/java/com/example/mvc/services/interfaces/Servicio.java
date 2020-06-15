@@ -2,11 +2,11 @@ package com.example.mvc.services.interfaces;
 
 import java.util.List;
 
-public interface Servicio<T,K> {
+public interface Servicio<A,K> {
 	
-	public List<T> getElements();
-	public T getElement(K id);
-	public void save(T element);
+	public List<A> getElements();
+	public A getElement(K id);
+	public void save(A element);
 	public void delete(K id);
 	
 
