@@ -10,7 +10,7 @@ public class SaludoBoot {
 	
 	@GetMapping(value="saludo",produces=MediaType.TEXT_PLAIN_VALUE)
 	public String saludar() {
-		return "Mi saludo";
+		return "Mi saludo y más";
 	}
 
 }
