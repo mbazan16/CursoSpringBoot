@@ -19,7 +19,7 @@ public class MyProcessor  implements ItemProcessor<DataIn,DataOut> {
 
    public DataOut process(DataIn item) throws Exception {
 
-   	log.info("[CustomItemProcessor -process]item:"+item);
+   	log.info("[MyProcessor -process]item:"+item);
 
        DataOut dataOut = new DataOut();
 
