@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Editorial {
+public class Editorial { 
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
