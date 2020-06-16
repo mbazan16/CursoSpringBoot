@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/screen.css" media="screen" />
 
 </head>
 <body>
@@ -14,54 +14,28 @@
 	</div>
 	<div class="line"></div>
 
-	<form action="/modificarLibro" method="post">
+	<form action="/modificar" method="post">
+	   <input type='hidden' th:field="${libro.id}"/>
 		<h4><b>Datos del libro</b></h4>
-		<p>
-			<h3><b>Autor:</b> <input type='text' name='autor' /></h3>
-		</p>
-		
-		<p>
-			<h3><b>Titulo:</b> <input type='text' name='titulo' /> </h3>
-		</p>
-		
-		<p>
-			<h3><b>Numero de paginas:</b> <input type='text' name='numPaginas' /> </h3>
-		</p>
-		
-		<p>
-			<h3><b>Fecha de publicacion:</b> <input type='text' name='fecha' /> </h3>
-		</p>
-		
-		<p>
-			<h3><b>Precio de venta:</b> <input type='text' name='precioVenta' /></h3>
-		</p>
-		
-		<p>
-			<h3><b>Categoria:</b> <input type='text' name='categoria' /></h3>
-		</p>
-		
-		<p>
-			<h3><b>Nombre de la editorial:</b> <input type='text' name='nombre' /></h3>
-		</p>
-		
-	
-		<p>
-			<h3><b>Telefono:</b> <input type='text' name='telefono' /></h3>
-		</p>
-		
-
-	    	<p>
-			<h3><b>Email:</b> <input type='text' name='email' /></h3>
-		</p>
+		  <p>
+			<h3><b>Autor:</b> <input type='text' th:field="${libro.autor}"/></h3>
+		  </p>
+		  <p>
 		
 		
-		<p>
-			<h3><b>Codigo postal:</b> <input type='text' name='codigoPostal' /></h3>
-		</p>
+			<h3><b>Titulo:</b> <input type='text' th:field="${libro.titulo}" /> </h3>
+		
+		 </p>
+		  <p>
 		
 		
-		<p>
-			<h3><b>Código de identificacion fiscal:</b> <input type='text' name='codIF' /></h3>
+		
+			<h3><b>Nombre de la editorial:</b> <select name="nombre"> 
+				<option th:if="editorial.id != null" th:each="editorial : ${editoriales}"
+					th:value="${editorial}" th:text="${editorial.nombre}"
+					th:selected="${libro.editorial.id==editorial.id}"></option>
+			</select>
+			</h3>
 		</p>
 		
 		

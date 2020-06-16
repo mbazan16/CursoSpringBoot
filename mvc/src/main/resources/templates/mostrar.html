@@ -13,28 +13,23 @@
 	</div>
 	<div class="line"></div>
 
-	<p th:each="libro : ${libros}">
-		<h2 th:text="'\'' + ${libro.titulo} + '\' de ' + ${libro.autor}"/>
-		<h3>Datos del libro</h3>
-		<p>
-			<span  th:text="'Titulo:' + ${libro.titulo}" /> <a href="/modificar">Modificar</a> <br/> 
-			<span th:text="'Autor:' + ${libro.autor}" /><br/>
-			<span th:text="'Anyo de publicacion:' + ${libro.fecha}" /> <br/>
-			<span th:text="'Numero de paginas:' + ${libro.numPaginas}" /> <br/>
-			<span th:text="'ISBN:' + ${libro.isbn}" /> <br/>
-			<span th:text="'Precio de venta:' + ${libro.precioVenta}" /> <br/>
-			<span th:text="'Categoria:' + ${libro.categoria}" /> <br/>
-		</p>
-		<h3>Datos de la editorial</h3>
-		<p>
-			<span th:text="'Nombre editorial:' + ${libro.editorial.nombre}" />  <br/>
-			<span th:text="'Telefono editorial:' + ${libro.editorial.telefono}" />  <br/>
-			<span th:text="'Email de contacto de la editorial:' + ${libro.editorial.email}" />  <br/>
-			<span th:text="'Codigo postal de la editorial:' + ${libro.editorial.codigoPostal}" />  <br/>
-			<span th:text="'Codigo de identificacion fiscal de la editorial:' + ${libro.editorial.codIF}" />  <br/>
-		</p>
+	<div >
+	<h4>Resultado</h4>
+	<p th:each="libro : ${libros}">		
 		
+			Titulo:<span  th:text="${libro.titulo}"></span>  <br/> 
+			Autor:<span th:text="${libro.autor}"></span><br/>
+			
+		
+			Nombre Editorial:<span th:text="${libro.editorial.nombre}" ></span>  <br/>
+			Telefono editorial:<span th:text="${libro.editorial.telefono}" ></span>  <br/>
+			Email contacto de la editorial<span th:text="${libro.editorial.email}" ></span>  <br/>
+			<a th:href="@{/modificarLibro/{id}(id = ${libro.id})}">Modificar</a></br>
+			
+		
+	
 	</p>
+	</div>
 
 	<h3><a href="/">Volver</a></h3>
    </div>

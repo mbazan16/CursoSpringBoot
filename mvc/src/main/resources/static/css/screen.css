@@ -9,7 +9,7 @@
 
 *{margin:0;padding:0}:focus,:active {outline:0}img{border: 0}
 body { font: .8em Arial, Tahoma, Verdana; background: #fff url(../images/bg.gif) repeat-x; color: #777; }
-a { text-decoration: none; color: #fff; }
+a { font-size: 1.2em; background: #B00A0A  repeat-x left bottom; padding: 6px 7px; color: #fff; font-weight: normal; margin: 5px 5px 15px; text-decoration:none}
 h1 { font-size: 1.4em; font-weight: normal; }
 	h1 a { color: #fff; font-size: 1.6em; }
 h2 { font-size: 1.2em; }

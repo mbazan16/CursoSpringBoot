@@ -48,6 +48,10 @@ public class Libro {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+	@Override
+	public String toString() {
+		return "Libro [id=" + id + ", editorial=" + editorial + ", autor=" + autor + ", titulo=" + titulo + "]";
+	}
 	
 	
 	

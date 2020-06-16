@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.mvc.dao.LibroRepository;
 import com.example.mvc.model.Libro;
+import com.example.mvc.services.interfaces.IServLibro;
 import com.example.mvc.services.interfaces.Servicio;
 
 @Service("ServLibro")
-public class ServLibro implements Servicio<Libro,Integer>{
+public class ServLibro implements IServLibro{
 	
 	@Autowired
 	LibroRepository repositorio;
@@ -38,6 +39,28 @@ public class ServLibro implements Servicio<Libro,Integer>{
 	@Override
 	public void delete(Integer id) {
 		repositorio.deleteById(id);
+		
+	}
+
+	@Override
+	public List<Libro> getElementsByTitulo(String titulo) {
+		
+		return repositorio.findByTituloContaining(titulo);
+	}
+
+	@Override
+	public List<Libro> getElementsByAutor(String autor) {
+		return repositorio.findByAutor(autor);
+	}
+
+	@Override
+	public void modificarAutorById(String autor, int id) {
+		repositorio.setAutorById(autor, id);
+		
+	}
+	@Override
+	public void modificarTituloById(String titulo, int id) {
+		repositorio.setTituloById(titulo, id);
 		
 	}
 

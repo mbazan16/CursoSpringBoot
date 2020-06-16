@@ -63,6 +63,11 @@ public class Editorial {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Editorial [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + "]";
+	}
+
 	
 	
 	
