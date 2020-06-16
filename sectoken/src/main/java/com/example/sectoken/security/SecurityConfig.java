@@ -13,11 +13,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-            .antMatchers("/login").permitAll() //permitimos el acceso a /login a cualquiera
+            .antMatchers("/authenticate").permitAll() //permitimos el acceso a /login a cualquiera
             .anyRequest().authenticated() //cualquier otra peticion requiere autenticacion
             .and()
             // Las peticiones /login pasaran previamente por este filtro
-            .addFilterBefore(new LoginFilter("/login", authenticationManager()),
+            .addFilterBefore(new LoginFilter("/authenticate", authenticationManager()),
                     UsernamePasswordAuthenticationFilter.class)
                 
             // Las demás peticiones pasarán por este filtro para validar el token
@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // Creamos una cuenta de usuario por default
         auth.inMemoryAuthentication()
-                .withUser("ask")
-                .password("{noop}123")
+                .withUser("admin")
+                .password("{noop}admin")
                 .roles("ADMIN");
     }
 }
