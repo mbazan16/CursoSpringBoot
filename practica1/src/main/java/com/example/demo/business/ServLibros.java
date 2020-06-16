@@ -24,7 +24,7 @@ public class ServLibros implements Servicio<Libro, Long> {
 	@Override
 	public Libro getElement(Long id) {
 		
-		return repositorio.findOne(id);
+		return repositorio.findById(id).get();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ServLibros implements Servicio<Libro, Long> {
 
 	@Override
 	public void delete(Long id) {
-		repositorio.delete(id);
+		repositorio.deleteById(id);
 	}
 
 }

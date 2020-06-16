@@ -24,7 +24,7 @@ public class ServEditoriales implements Servicio<Editorial, Long> {
 	@Override
 	public Editorial getElement(Long id) {
 		
-		return repositorio.findOne(id);
+		return repositorio.findById(id).get();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ServEditoriales implements Servicio<Editorial, Long> {
 
 	@Override
 	public void delete(Long id) {
-		repositorio.delete(id);
+		repositorio.deleteById(id);
 	}
 
 }
