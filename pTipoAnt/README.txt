@@ -1,0 +1,1 @@
+Este proyecto se tiene que ejecutar con la base de datos OracleXE y el esquema que trae como ejemplo HR/hr

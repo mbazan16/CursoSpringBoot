@@ -31,8 +31,7 @@ Departamentos
 </div>
 <ul>
 <c:forEach items="${listado}" var="elemento">
-<li>${elemento.nombre} 
-<img src="./static/img/lupa.png" width=25 height=25 onClick="javascript:verElemento(${elemento.id})">
+<li><a href="javascript:verElemento(${elemento.id})">${elemento.nombre} </a>
 </li>
 </c:forEach>
 </ul>

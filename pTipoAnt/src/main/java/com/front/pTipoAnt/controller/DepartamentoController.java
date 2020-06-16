@@ -25,7 +25,7 @@ import com.front.pTipoAnt.data.Departamento;
  */
 @WebServlet("/departamento")
 public class DepartamentoController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
 
 	IServicio<Long, Departamento> servicio;
 
