@@ -1,13 +1,14 @@
-package com.example.security.services;
+package com.example.security.bussines;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import com.example.security.business.interfaces.Servicio;
 import com.example.security.dao.LibroRepository;
 import com.example.security.model.Libro;
-import com.example.security.services.interfaces.Servicio;
 
 @Service("ServLibro")
 public class ServLibro implements Servicio<Libro,Integer>{
@@ -28,6 +29,7 @@ public class ServLibro implements Servicio<Libro,Integer>{
 		return repositorio.findById(id).get();
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public void save(Libro element) {
 		repositorio.save(element);

@@ -1,4 +1,4 @@
-package com.example.security.config;
+package com.example.security.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class SwaggerConfig {
 		  
 		  return new   Docket(DocumentationType.SWAGGER_2)
 				  .select()
-				  .apis(RequestHandlerSelectors.basePackage("com.example.security.controller"))
+				  .apis(RequestHandlerSelectors.basePackage("com.example.security.services"))
 				  .paths(PathSelectors.any())
 				  .build();
 		 		

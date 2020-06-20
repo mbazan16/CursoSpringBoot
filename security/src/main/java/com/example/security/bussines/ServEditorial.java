@@ -1,13 +1,13 @@
-package com.example.security.services;
+package com.example.security.bussines;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.security.business.interfaces.Servicio;
 import com.example.security.dao.EditorialRepository;
 import com.example.security.model.Editorial;
-import com.example.security.services.interfaces.Servicio;
 
 @Service("ServEditorial")
 public class ServEditorial implements Servicio<Editorial,Integer>{

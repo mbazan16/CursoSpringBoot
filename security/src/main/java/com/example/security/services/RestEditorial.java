@@ -1,4 +1,4 @@
-package com.example.security.controller;
+package com.example.security.services;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.security.business.interfaces.Servicio;
 import com.example.security.model.Editorial;
-import com.example.security.services.interfaces.Servicio;
 
 @RestController
 @RequestMapping("editorial")
@@ -33,8 +33,6 @@ public class RestEditorial {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Editorial> findAll(){
 	      logger.info("RestEditorial[findAll]");
-	      logger.warn("this is a WARN message");
-	      logger.debug("this is a DEBUG message");
 		return servicio.getElements();
 	}
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
