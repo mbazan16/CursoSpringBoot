@@ -31,7 +31,7 @@ public class LibroController {
 	@RequestMapping("/libros")
 	public String index(Model model) {
 		
-		logger.info("[EditorialController-index]");
+		logger.info("[LibroController-index]");
 		
 		model.addAttribute("libros", servicio.getElements());
 
@@ -41,13 +41,13 @@ public class LibroController {
 	@RequestMapping("/mostrarPorTitulo")
 	public String mostrarPorTitulo(@RequestParam String titulo, Model model) {
 		
-		logger.info("[EditorialController-mostrarPorTitulo] titulo:"+titulo);
+		logger.info("[LibroController-mostrarPorTitulo] titulo:"+titulo);
 
 		List<Libro> libros = servicio.getElementsByTitulo(titulo);
 
 	    model.addAttribute("libros", libros);
 	    
-	    logger.info("[EditorialController-mostrarPorTitulo] libros:"+libros);
+	    logger.info("[LibroController-mostrarPorTitulo] libros:"+libros);
 
 		return "mostrar";
 	}
@@ -55,7 +55,7 @@ public class LibroController {
 	@RequestMapping("/mostrarPorAutor")
 	public String mostrarPorAutor(@RequestParam String autor, Model model) {
 		
-		logger.info("[EditorialController-mostrarPorAutor] autor:"+autor);
+		logger.info("[LibroController-mostrarPorAutor] autor:"+autor);
 
 		List<Libro> libros = servicio.getElementsByAutor(autor);
 
@@ -68,7 +68,7 @@ public class LibroController {
 	@RequestMapping("/nuevoLibro")
 	public String nuevoLibro(Model model) {
 		
-		logger.info("[EditorialController-nuevoLibro]");
+		logger.info("[LibroController-nuevoLibro]");
 		
 		List<Editorial> editoriales =servEditorial.getElementsOrder();
 		
@@ -81,7 +81,7 @@ public class LibroController {
 	@RequestMapping("/insertar")
 	public String insertar(@RequestParam String nombre, Libro libro, Model model) {
 		
-		logger.info("[EditorialController-insertar] nombre:"+nombre+" libro:"+ libro);
+		logger.info("[LibroController-insertar] nombre:"+nombre+" libro:"+ libro);
 
 		Editorial e = servEditorial.getByNombre(nombre);
 		libro.setEditorial(e);
@@ -95,7 +95,7 @@ public class LibroController {
 	@RequestMapping("/modificarLibro/{id}")
 	public String modificarLibro(@PathVariable Integer id, Model model){
 		
-		logger.info("[EditorialController-modificarLibro] id:"+id);
+		logger.info("[LibroController-modificarLibro] id:"+id);
 		
 		Libro libro = servicio.getElement(id);
 		
@@ -112,7 +112,7 @@ public class LibroController {
 	@RequestMapping("/modificar")
 	public String modificar( Libro libro, Editorial editorial,Model model){
 		
-		logger.info("[EditorialController-modificar] libro:"+ libro +" editorial:"+ editorial);
+		logger.info("[LibroController-modificar] libro:"+ libro +" editorial:"+ editorial);
 		
 		servicio.modificarTituloById(libro.getTitulo(), libro.getId());
 		servicio.modificarAutorById(libro.getAutor(), libro.getId());
