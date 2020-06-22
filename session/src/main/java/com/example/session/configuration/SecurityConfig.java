@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 
@@ -24,7 +23,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	final static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 	@Autowired
-	DataSource datasource;
+	DataSource datasource;	
+
+	@Autowired
+	MyFilter myFilter;
+	
+	@Autowired
+	CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+	
+	@Autowired
+	CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	
+	@Autowired
+	CustomAccessDeniedHandler customAccessDeniedHandler;
+	
+	@Autowired
+	MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint;
 	
 	@Bean
 	public AuthenticationManager authMg() throws Exception {
@@ -66,23 +80,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/h2-console/**").permitAll()  //.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()	
-		//.addFilterAfter(new MyFilter() ,UsernamePasswordAuthenticationFilter.class) 
+		//.addFilterAfter(myFilter ,UsernamePasswordAuthenticationFilter.class) 
         //.permitAll()
         // .defaultSuccessUrl("/libro",true)
-       // .failureHandler(new CustomAuthenticationFailureHandler())
+       // .failureHandler(customAuthenticationFailureHandler)
        // .and()
 		.logout()
 		.deleteCookies("JSESSIONID")
-		.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+		.logoutSuccessHandler(customLogoutSuccessHandler)
 		.and()
 		.headers().frameOptions().disable()
 		.and()
 		.exceptionHandling()
 		.accessDeniedPage("/accessDenied")
-		.accessDeniedHandler(new CustomAccessDeniedHandler())
+		.accessDeniedHandler(customAccessDeniedHandler)
 		.and()
 		.httpBasic()
-		.authenticationEntryPoint(new MyBasicAuthenticationEntryPoint());
+		.authenticationEntryPoint(myBasicAuthenticationEntryPoint);
 
 	}
 	
