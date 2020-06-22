@@ -19,7 +19,7 @@ public class ServSession {
 	UsuarioSession usuarioSession;
 	
 	public void init(HttpServletRequest request) {
-		logger.info("[ServSession-init ]");
+		logger.info("[ServSession-init ]"); 
 		logger.info("SessionId:"+request.getSession().getId());
 		String username=request.getUserPrincipal().getName();
 		if(usuarioSession.getUsername()==null || usuarioSession.getUsername()!=username) {
