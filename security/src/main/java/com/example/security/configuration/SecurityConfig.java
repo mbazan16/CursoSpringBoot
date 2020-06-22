@@ -24,6 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	DataSource datasource;
 	
+	@Autowired
+	MyBasicAuthenticationEntryPoint myBasicAuthenticationEntryPoint;
+	
+	@Autowired
+	CustomAccessDeniedHandler customAccessDeniedHandler;
+	
+	@Autowired
+	CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	
+	@Autowired
+	CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 	@Bean
 	public AuthenticationManager authMg() throws Exception {
 		return super.authenticationManagerBean();
@@ -56,20 +67,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //.formLogin()
         //.permitAll()
         // .defaultSuccessUrl("/libro",true)
-       // .failureHandler(new CustomAuthenticationFailureHandler())
+       // .failureHandler(customAuthenticationFailureHandler)
        // .and()
 		.logout()
 		.deleteCookies("JSESSIONID")
-		.logoutSuccessHandler(new CustomLogoutSuccessHandler())
+		.logoutSuccessHandler(customLogoutSuccessHandler)
 		.and()
 		.headers().frameOptions().disable()
 		.and()
 		.exceptionHandling()
 		.accessDeniedPage("/accessDenied")
-		.accessDeniedHandler(new CustomAccessDeniedHandler())
+		.accessDeniedHandler(customAccessDeniedHandler)
 		.and()
 		.httpBasic()
-		.authenticationEntryPoint(new MyBasicAuthenticationEntryPoint());
+		.authenticationEntryPoint(myBasicAuthenticationEntryPoint);
 
 	}
 	
