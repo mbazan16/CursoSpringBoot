@@ -24,6 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	DataSource datasource;
 	
+	@Autowired
+	CustomAccessDeniedHandler customAccessDeniedHandler;
+	
+	@Autowired
+	CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+	
 	@Bean
 	public AuthenticationManager authMg() throws Exception {
 		return super.authenticationManagerBean();
@@ -61,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .permitAll()
         .loginPage("/login")
         .defaultSuccessUrl("/libros",true)
-        //.failureHandler(new CustomAuthenticationFailureHandler())
+        //.failureHandler(customAuthenticationFailureHandler)
         .failureUrl("/login?error=true")
         .usernameParameter("username")
         //.usernameParameter("email")
@@ -74,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.exceptionHandling()
 		.accessDeniedPage("/accessDenied")
-		.accessDeniedHandler(new CustomAccessDeniedHandler());
+		.accessDeniedHandler(customAccessDeniedHandler);
 
 	}
 	
