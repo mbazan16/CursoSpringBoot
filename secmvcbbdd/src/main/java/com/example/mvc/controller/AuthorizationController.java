@@ -1,5 +1,7 @@
 package com.example.mvc.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -9,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthorizationController {
@@ -37,31 +38,28 @@ public class AuthorizationController {
 	}
 	
 	@GetMapping({"/user"})
-	public String user(Authentication authentication) {
+	public String user(HttpServletRequest request,Authentication authentication, Principal principal) {
 		
 		logger.info("[AuthorizationController-user]");
 		
-		logger.info("nombre:"+authentication.getName());
+		logger.info("request:nombre:"+request.getUserPrincipal().getName());
 		
-		logger.info("authorities:"+authentication.getAuthorities());
+		logger.info("authentication:nombre:"+authentication.getName());
 		
-		logger.info("credenciales:"+authentication.getCredentials());
+		logger.info("authentication:authorities:"+authentication.getAuthorities());
 		
-		logger.info("details:"+authentication.getDetails());
+		logger.info("authentication:credenciales:"+authentication.getCredentials());
 		
-		logger.info("principal:"+authentication.getPrincipal());
+		logger.info("authentication:details:"+authentication.getDetails());
+		
+		logger.info("authentication:principal:"+authentication.getPrincipal());
+		
+		logger.info("principal:principal:"+principal);
+		
+		logger.info("principal:name:"+principal.getName());
 		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-		return "user";
-	}
-	
-	@GetMapping({"/username"})
-	public String username(HttpServletRequest request) {
-		
-		logger.info("[AuthorizationController-username]");
-		
-		logger.info("nombre:"+request.getUserPrincipal().getName());
 		return "user";
 	}
 	
